@@ -32,8 +32,8 @@ if (System.getenv('VERSION') != null) {
     version = 'dev'
 }
 
-group = "com.example.examplemod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "modid"
+group = "com.lumintorious.tfcstorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "TFCStorage"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
@@ -77,8 +77,8 @@ minecraft {
 }
 
 dependencies {
-    deobfProvided "mcjty.theoneprobe:TheOneProbe-${shortVersion}:1.12-1.4.12-6"
-    deobfProvided "curse.maven:hwyla:2568751"
+    //deobfProvided "mcjty.theoneprobe:TheOneProbe-${shortVersion}:1.12-1.4.12-6"
+    //deobfProvided "curse.maven:hwyla:2568751"
     compile fileTree(include: ["*.jar"], dir: "libs")
 
 }
