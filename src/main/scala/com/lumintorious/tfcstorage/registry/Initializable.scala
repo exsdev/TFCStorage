@@ -1,5 +1,6 @@
 package com.lumintorious.tfcstorage.registry
 
+import com.lumintorious.tfcstorage.food.StoredTrait
 import com.lumintorious.tfcstorage.tile._
 
 trait Initializable {
@@ -7,6 +8,7 @@ trait Initializable {
 }
 
 object Initializable extends Initializable {
+	StoredTrait.initialize()
 	TileShelf.initialize()
 	TileJar.initialize()
 	TileHanger.initialize()

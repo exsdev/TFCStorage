@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 object EventHandler {
 	
 	@SubscribeEvent
-	def onItemUse(event: LivingEntityUseItemEvent): Unit = {
+	def onItemUse(event: LivingEntityUseItemEvent.Stop): Unit = {
 		val stack = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.MAINHAND)
 		val name = stack.getItem().getRegistryName().getPath().split("/").last.toLowerCase()
 		if(event.getEntityLiving().isSneaking() && name.contains("_grain"))
@@ -45,6 +45,7 @@ object EventHandler {
 					event.getEntity() match {
 						case player: EntityPlayer => tile.takeStack(player, 16)
 					}
+					event.setCanceled(true)
 				}
 			}
 		}
