@@ -31,7 +31,7 @@ class TileHanger extends TileFoodHolder {
 	
 	override def fits(stack: ItemStack) =
 		IIngredient.of("categoryCookedMeat").test(stack) ||
-		IIngredient.of("categoryDairt").test(stack) ||
+		IIngredient.of("categoryDairy").test(stack) ||
 		stack.getItem() == ItemFoodTFC.get(Food.GARLIC)
 	
 	override def updatePreservation(): Unit = {
