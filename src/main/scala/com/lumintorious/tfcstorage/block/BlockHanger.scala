@@ -82,7 +82,7 @@ with IItemSize
 			case tile: TileFoodHolder => tile.onLeftClick(playerIn)
 		}
 	}
-	
+	override def verticalOffset = -1
 	override def createNewTileEntity(worldIn: World, meta: Int) = new TileHanger()
 	
 	override def isOpaqueCube(state: IBlockState) = false

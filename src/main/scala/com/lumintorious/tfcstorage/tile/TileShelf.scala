@@ -17,7 +17,7 @@ class TileShelf extends TileFoodHolder {
 	
 	override def handleGivenStack(stack: ItemStack) = {
 		StoredTrait.COOL << stack
-		StoredTrait.HUNG << stack
+		StoredTrait.SHELVED << stack
 		super.handleGivenStack(stack)
 	}
 	

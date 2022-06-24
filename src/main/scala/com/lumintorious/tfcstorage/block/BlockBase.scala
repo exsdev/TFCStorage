@@ -48,7 +48,7 @@ abstract class BlockBase private(material: Material) extends Block(material) {
 		case tile: TileFoodHolder => tile.updatePreservation()
 		}
 	}
-	
+	def verticalOffset = 0
 	override def breakBlock
 	(
 		worldIn: World,
@@ -56,7 +56,7 @@ abstract class BlockBase private(material: Material) extends Block(material) {
 		state: IBlockState
 	): Unit = {
 		val drops = this.getDrops(worldIn, pos, state)
-		drops.foreach(InventoryHelper.spawnItemStack(worldIn, pos.getX, pos.getY, pos.getZ, _))
+		drops.foreach(InventoryHelper.spawnItemStack(worldIn, pos.getX, pos.getY + verticalOffset, pos.getZ, _))
 	}
 	
 	def getDrops(
