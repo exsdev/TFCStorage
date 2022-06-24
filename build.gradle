@@ -29,7 +29,7 @@ String strippedVersion = shortVersion.replace(".", "") + "0"
 if (System.getenv('VERSION') != null) {
     version = System.getenv('VERSION')
 } else {
-    version = '1.1.0'
+    version = '1.1.1'
 }
 
 group = "com.lumintorious.tfcstorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -85,15 +85,15 @@ dependencies {
 
 processResources {
     // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
+    inputs.property "version", version
     inputs.property "mcversion", project.minecraft.version
 
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
                 
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        // update version 
+        expand "mod_version" : version
     }
         
     // copy everything else except the mcmod.info

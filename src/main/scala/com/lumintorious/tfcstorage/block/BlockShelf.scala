@@ -1,9 +1,7 @@
 package com.lumintorious.tfcstorage.block
 
-import com.lumintorious.tfcstorage.compat.waila.{JarProvider, ShelfProvider}
 import com.lumintorious.tfcstorage.registry._
-import com.lumintorious.tfcstorage.tile.{TileFoodHolder, TileJar, TileShelf}
-import mcjty.theoneprobe.api.{IProbeHitData, IProbeInfo, IProbeInfoAccessor, ProbeMode}
+import com.lumintorious.tfcstorage.tile.{TileFoodHolder, TileShelf}
 import net.dries007.tfc.api.capability.size._
 import net.dries007.tfc.api.registries.TFCRegistries
 import net.dries007.tfc.api.types.Tree
@@ -45,7 +43,6 @@ class BlockShelf(wood: Tree)
 extends BlockBase("wood/food_shelf/" + wood.getRegistryName.getPath, Material.WOOD)
 with IItemSize
 with ITileEntityProvider
-with IProbeInfoAccessor
 {
 	this.setSoundType(SoundType.WOOD)
 	this.setHarvestLevel("axe", 0)
@@ -137,17 +134,4 @@ with IProbeInfoAccessor
 	
 	override def getSize(itemStack: ItemStack) = Size.LARGE
 	override def getWeight(itemStack: ItemStack) = Weight.HEAVY
-	
-	override def addProbeInfo(
-		probeMode: ProbeMode,
-		iProbeInfo: IProbeInfo,
-		entityPlayer: EntityPlayer,
-		world: World, iBlockState: IBlockState,
-		iProbeHitData: IProbeHitData
-    ) = {
-		val list = ShelfProvider.getTooltip(world, iProbeHitData.getPos(), null)
-		for(text <- list) {
-			iProbeInfo.text(text)
-		}
-	}
 }

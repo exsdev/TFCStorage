@@ -1,9 +1,7 @@
 package com.lumintorious.tfcstorage.block
 
-import com.lumintorious.tfcstorage.compat.waila.HangerProvider
 import com.lumintorious.tfcstorage.registry.RegistryHandler
 import com.lumintorious.tfcstorage.tile._
-import mcjty.theoneprobe.api._
 import net.dries007.tfc.api.capability.size._
 import net.dries007.tfc.api.registries.TFCRegistries
 import net.dries007.tfc.api.types.Tree
@@ -41,7 +39,6 @@ object BlockHanger extends RegistryHandler[Block] {
 class BlockHanger(wood: Tree)
 extends BlockBase("wood/hanger/" + wood.getRegistryName.getPath, Material.WOOD)
 with ITileEntityProvider
-with IProbeInfoAccessor
 with IItemSize
 {
 	this.setSoundType(SoundType.WOOD)
@@ -87,19 +84,6 @@ with IItemSize
 	}
 	
 	override def createNewTileEntity(worldIn: World, meta: Int) = new TileHanger()
-	
-	override def addProbeInfo(
-	     probeMode: ProbeMode,
-	     iProbeInfo: IProbeInfo,
-	     entityPlayer: EntityPlayer,
-	     world: World, iBlockState: IBlockState,
-	     iProbeHitData: IProbeHitData
-	) = {
-		val list = HangerProvider.getTooltip(world, iProbeHitData.getPos(), null)
-		for(text <- list) {
-			iProbeInfo.text(text)
-		}
-	}
 	
 	override def isOpaqueCube(state: IBlockState) = false
 	

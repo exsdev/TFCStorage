@@ -4,7 +4,7 @@ import com.lumintorious.tfcstorage.TFCStorage._
 import com.lumintorious.tfcstorage.proxy.CommonProxy
 import com.lumintorious.tfcstorage.registry.Initializable
 import net.minecraftforge.fml.common.Mod.EventHandler
-import net.minecraftforge.fml.common.event.FMLInitializationEvent
+import net.minecraftforge.fml.common.event.{FMLInitializationEvent, FMLInterModComms}
 import net.minecraftforge.fml.common._
 
 @Mod(modid = MODID, version = VERSION, modLanguage = "scala", useMetadata = true)
@@ -20,6 +20,7 @@ object TFCStorage {
 	@EventHandler
 	def init(event: FMLInitializationEvent): Unit = {
 		Initializable.initialize()
+		FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "com.lumintorious.tfcstorage.compat.waila.TOPPlugin")
 	}
 }
 

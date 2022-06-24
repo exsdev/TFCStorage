@@ -1,9 +1,7 @@
 package com.lumintorious.tfcstorage.block
 
-import com.lumintorious.tfcstorage.compat.waila.GrainPileProvider
 import com.lumintorious.tfcstorage.registry.RegistryHandler
 import com.lumintorious.tfcstorage.tile._
-import mcjty.theoneprobe.api._
 import net.dries007.tfc.api.capability.size._
 import net.dries007.tfc.util.agriculture.Food
 import net.minecraft.block._
@@ -39,7 +37,6 @@ object BlockGrainPile extends RegistryHandler[Block] {
 class BlockGrainPile(val food: String)
 extends BlockBase("grain_pile/" + food, Material.SAND)
 with ITileEntityProvider
-with IProbeInfoAccessor
 with IItemSize
 {
 	this.setSoundType(SoundType.WOOD)
@@ -82,20 +79,6 @@ with IItemSize
 	) = {}
 		
 	override def createNewTileEntity(worldIn: World, meta: Int) = new TileGrainPile()
-	
-	override def addProbeInfo(
-		probeMode: ProbeMode,
-		iProbeInfo: IProbeInfo,
-		entityPlayer: EntityPlayer,
-		world: World, iBlockState: IBlockState,
-		iProbeHitData: IProbeHitData
-	) = {
-		import scala.collection.JavaConversions._
-		val list = GrainPileProvider.getTooltip(world, iProbeHitData.getPos(), null)
-		for(text <- list) {
-			iProbeInfo.text(text)
-		}
-	}
 	
 	override def getSize(itemStack: ItemStack) = Size.HUGE
 	

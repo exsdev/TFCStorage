@@ -1,21 +1,16 @@
 package com.lumintorious.tfcstorage.compat.waila
 
-import java.util.{ArrayList, Collections}
+import java.util.Collections
 
-import com.lumintorious.tfcstorage.block.BlockJar
 import com.lumintorious.tfcstorage.registry.Initializable
 import com.lumintorious.tfcstorage.tile.TileJar
-import mcp.mobius.waila.api.{IWailaPlugin, IWailaRegistrar, WailaPlugin}
-import net.dries007.tfc.compat.waila.{HwylaPluginTFC, TOPPlugin}
-import net.dries007.tfc.compat.waila.interfaces.{HwylaBlockInterface, IWailaBlock, TOPBlockInterface}
-import net.minecraft.client.util.ITooltipFlag
+import net.dries007.tfc.compat.waila.interfaces.IWailaBlock
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.world.World
 
 import scala.collection.JavaConverters._
-import scala.collection.JavaConversions._
 import scala.collection.mutable.MutableList
 
 

@@ -1,23 +1,19 @@
 package com.lumintorious.tfcstorage.block
 
-import com.lumintorious.tfcstorage.compat.waila.JarProvider
 import com.lumintorious.tfcstorage.itemblock.ItemBlockJar
 import com.lumintorious.tfcstorage.registry.RegistryHandler
 import com.lumintorious.tfcstorage.tile._
-import mcjty.theoneprobe.api._
 import net.dries007.tfc.api.capability.size._
-import net.dries007.tfc.objects.blocks.wood.BlockBarrel
 import net.minecraft.block.BlockHorizontal.FACING
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.{BlockStateContainer, IBlockState}
 import net.minecraft.block._
-import net.minecraft.block.properties.{IProperty, PropertyBool}
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math._
-import net.minecraft.util.{registry, _}
+import net.minecraft.util._
 import net.minecraft.world._
 import net.minecraftforge.registries.IForgeRegistry
 
@@ -44,7 +40,7 @@ class BlockJar(name: String)
 extends BlockBase(name, Material.GLASS)
 with ITileEntityProvider
 with IItemSize
-with IProbeInfoAccessor {
+{
 	
 	this.setSoundType(SoundType.GLASS)
 	this.setHardness(0.5f)
@@ -134,20 +130,5 @@ with IProbeInfoAccessor {
 	override def getWeight(itemStack: ItemStack) = Option(itemStack.getTagCompound()) match {
 		case Some(_) => Weight.MEDIUM
 		case None => Weight.VERY_HEAVY
-	}
-	
-	override def addProbeInfo(
-		probeMode: ProbeMode,
-		iProbeInfo: IProbeInfo,
-		entityPlayer: EntityPlayer,
-		world: World,
-		iBlockState: IBlockState,
-		iProbeHitData: IProbeHitData
-    ) = {
-		val list = JarProvider.getTooltip(world, iProbeHitData.getPos(), null)
-		for(text <- list.asScala) {
-			iProbeInfo.text(text)
-		}
-		
 	}
 }
