@@ -22,7 +22,30 @@
           "particle": "minecraft:blocks/glass"
         }
       },
-      "north": {}
+      "north": {
+        "model": "tfcstorage:jar",
+        "textures": {
+          "lid": "tfc:blocks/metal/tin",
+          "glass": "tfc:blocks/metal/tin",
+          "particle": "tfc:blocks/metal/tin"
+        }
+      },
+      "east": {
+        "model": "tfcstorage:jar",
+        "textures": {
+          "lid": "tfc:blocks/metal/tin",
+          "glass": "tfc:blocks/metal/tin",
+          "particle": "tfc:blocks/metal/tin"
+        }
+      },
+      "west": {
+        "model": "tfcstorage:jar",
+        "textures": {
+          "lid": "tfc:blocks/metal/tin",
+          "glass": "tfc:blocks/metal/tin",
+          "particle": "tfc:blocks/metal/tin"
+        }
+      }
     }
   }
 }
