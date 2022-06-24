@@ -105,6 +105,7 @@ with IProbeInfoAccessor
 		case EnumFacing.WEST => BlockShelf.BOUNDING_BOX_W
 		case EnumFacing.EAST => BlockShelf.BOUNDING_BOX_E
 		case EnumFacing.SOUTH => BlockShelf.BOUNDING_BOX_S
+		case _ => BlockShelf.BOUNDING_BOX_N
 		}
 	}
 	
