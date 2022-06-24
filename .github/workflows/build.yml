@@ -3,6 +3,8 @@ name: Build and Release 1.12.x
 on:
   push:
     tags: 'v*'
+  
+  workflow_dispatch:
 
 jobs:
   build:
