@@ -94,7 +94,7 @@ class TileFoodHolder extends TileEntity with ITickable {
       updatePreservation()
       markForBlockUpdate()
     } else {
-      timeLeft += 1
+      timeLeft -= 1
     }
   }
 
