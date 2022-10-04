@@ -20,22 +20,22 @@ import org.jline.utils.InfoCmp.Capability
 import scala.collection.mutable.MutableList
 import scala.collection.JavaConversions._
 
-object HangerProvider extends IWailaBlock with Initializable{
-	override def getTooltip(
-		world: World,
-		blockPos: BlockPos,
-		nbtTagCompound: NBTTagCompound
-	) = {
-		var list = new MutableList[String]
-		world.getTileEntity(blockPos) match {
-		case tile: TileHanger =>
-			if (tile.stack != null && !tile.stack.isEmpty) {
-				list += tile.stack.getCount() + " x " + tile.stack.getDisplayName()
-				Helper.computeDecayTooltip(tile.stack, list)
-			}
-			list
-		}
-	}
-	
-	override def getLookupClass() = Collections.singletonList(classOf[TileHanger])
+object HangerProvider extends IWailaBlock with Initializable {
+  override def getTooltip(
+      world: World,
+      blockPos: BlockPos,
+      nbtTagCompound: NBTTagCompound
+  ) = {
+    var list = new MutableList[String]
+    world.getTileEntity(blockPos) match {
+      case tile: TileHanger =>
+        if (tile.stack != null && !tile.stack.isEmpty) {
+          list += tile.stack.getCount() + " x " + tile.stack.getDisplayName()
+          Helper.computeDecayTooltip(tile.stack, list)
+        }
+        list
+    }
+  }
+
+  override def getLookupClass() = Collections.singletonList(classOf[TileHanger])
 }

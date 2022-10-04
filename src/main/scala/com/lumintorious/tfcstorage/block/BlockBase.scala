@@ -18,84 +18,91 @@ import net.minecraft.world.{IBlockAccess, World}
 import scala.collection.mutable.MutableList
 
 object BlockBase {
-	val itemBlocks = new MutableList[Item]
+  val itemBlocks = new MutableList[Item]
 }
 
-abstract class BlockBase private(material: Material) extends Block(material) {
-	def this(registryName: String, material: Material) {
-		this(material)
-		this.setRegistryName(registryName)
-		this.setTranslationKey(registryName)
-		this.initializeItemBlock()
-	}
-	
-	def initializeItemBlock(): BlockBase = {
-		this.itemBlock = new ItemBlockTFC(this).setRegistryName(this.getRegistryName)
-		BlockBase.itemBlocks += this.itemBlock
-		this
-	}
-	
-	override
-	def observedNeighborChange
-	(
-		observerState: IBlockState,
-		world: World,
-		observerPos: BlockPos,
-		changedBlock: Block,
-		changedBlockPos: BlockPos
-	): Unit = {
-		world.getTileEntity(observerPos) match {
-		case tile: TileFoodHolder => tile.updatePreservation()
-		}
-	}
-	def verticalOffset = 0
-	override def breakBlock
-	(
-		worldIn: World,
-		pos: BlockPos,
-		state: IBlockState
-	): Unit = {
-		val drops = this.getDrops(worldIn, pos, state)
-		drops.foreach(InventoryHelper.spawnItemStack(worldIn, pos.getX, pos.getY + verticalOffset, pos.getZ, _))
-	}
-	
-	def getDrops(
-		world: World,
-		pos: BlockPos,
-		state: IBlockState
-	): MutableList[ItemStack] =
-	{
-		val list = new MutableList[ItemStack]
-		world.getTileEntity(pos) match {
-			case tile: TileFoodHolder =>
-				if(tile.getDrops(list))
-				{
-					list += new ItemStack(this.itemBlock)
-				}
-			case _ => list += new ItemStack(this.itemBlock)
-		}
-		list
-	}
-	
-	override def getDrops(drops: NonNullList[ItemStack],
-		world: IBlockAccess, pos: BlockPos,
-		state: IBlockState, fortune: Int
-	) = {}
-	
-	override def getDrops(
-		world: IBlockAccess,
-		pos: BlockPos,
-		state: IBlockState,
-		fortune: Int
-	) = Arrays.asList()
-	
-	protected var itemBlock: Item = _
-	
-	override def getCreativeTab = CreativeTabs.DECORATIONS
-	
-	def getItemBlock(): Item = itemBlock
-	
-	def registerItemModel() = {
-		TFCStorage.proxy.registerItemModel(getItemBlock(), 0, "normal")
-	}
+abstract class BlockBase private (material: Material) extends Block(material) {
+  def this(registryName: String, material: Material) {
+    this(material)
+    this.setRegistryName(registryName)
+    this.setTranslationKey(registryName)
+    this.initializeItemBlock()
+  }
+
+  def initializeItemBlock(): BlockBase = {
+    this.itemBlock =
+      new ItemBlockTFC(this).setRegistryName(this.getRegistryName)
+    BlockBase.itemBlocks += this.itemBlock
+    this
+  }
+
+  override def observedNeighborChange(
+      observerState: IBlockState,
+      world: World,
+      observerPos: BlockPos,
+      changedBlock: Block,
+      changedBlockPos: BlockPos
+  ): Unit = {
+    world.getTileEntity(observerPos) match {
+      case tile: TileFoodHolder => tile.updatePreservation()
+    }
+  }
+  def verticalOffset = 0
+  override def breakBlock(
+      worldIn: World,
+      pos: BlockPos,
+      state: IBlockState
+  ): Unit = {
+    val drops = this.getDrops(worldIn, pos, state)
+    drops.foreach(
+      InventoryHelper.spawnItemStack(
+        worldIn,
+        pos.getX,
+        pos.getY + verticalOffset,
+        pos.getZ,
+        _
+      )
+    )
+  }
+
+  def getDrops(
+      world: World,
+      pos: BlockPos,
+      state: IBlockState
+  ): MutableList[ItemStack] = {
+    val list = new MutableList[ItemStack]
+    world.getTileEntity(pos) match {
+      case tile: TileFoodHolder =>
+        if (tile.getDrops(list)) {
+          list += new ItemStack(this.itemBlock)
+        }
+      case _ => list += new ItemStack(this.itemBlock)
+    }
+    list
+  }
+
+  override def getDrops(
+      drops: NonNullList[ItemStack],
+      world: IBlockAccess,
+      pos: BlockPos,
+      state: IBlockState,
+      fortune: Int
+  ) = {}
+
+  override def getDrops(
+      world: IBlockAccess,
+      pos: BlockPos,
+      state: IBlockState,
+      fortune: Int
+  ) = Arrays.asList()
+
+  protected var itemBlock: Item = _
+
+  override def getCreativeTab = CreativeTabs.DECORATIONS
+
+  def getItemBlock(): Item = itemBlock
+
+  def registerItemModel() = {
+    TFCStorage.proxy.registerItemModel(getItemBlock(), 0, "normal")
+  }
 }

@@ -15,23 +15,23 @@ import scala.collection.JavaConverters._
 import scala.collection.JavaConversions._
 import scala.collection.mutable.MutableList
 
-object ShelfProvider extends IWailaBlock with Initializable{
-	override def getTooltip(
-		world: World,
-		blockPos: BlockPos,
-		nbtTagCompound: NBTTagCompound
-	)= {
-		var list = new MutableList[String]
-		world.getTileEntity(blockPos) match {
-			case tile: TileShelf =>
-			if(tile.stack != null && !tile.stack.isEmpty){
-				list += tile.stack.getCount() + " x " + tile.stack.getDisplayName()
-				Helper.computeDecayTooltip(tile.stack, list)
-			}
-		}
-		list.asJava
-		
-	}
-	
-	override def getLookupClass() = Collections.singletonList(classOf[TileShelf])
+object ShelfProvider extends IWailaBlock with Initializable {
+  override def getTooltip(
+      world: World,
+      blockPos: BlockPos,
+      nbtTagCompound: NBTTagCompound
+  ) = {
+    var list = new MutableList[String]
+    world.getTileEntity(blockPos) match {
+      case tile: TileShelf =>
+        if (tile.stack != null && !tile.stack.isEmpty) {
+          list += tile.stack.getCount() + " x " + tile.stack.getDisplayName()
+          Helper.computeDecayTooltip(tile.stack, list)
+        }
+    }
+    list.asJava
+
+  }
+
+  override def getLookupClass() = Collections.singletonList(classOf[TileShelf])
 }
