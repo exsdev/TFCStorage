@@ -143,7 +143,7 @@ class TileFoodHolder extends TileEntity with ITickable{
 		nbt
 	}
 	
-	override def handleUpdateTag(tag: NBTTagCompound) {
+	override def handleUpdateTag(tag: NBTTagCompound) = {
 		this.readFromNBT(tag)
 	}
 	

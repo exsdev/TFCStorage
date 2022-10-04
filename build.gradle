@@ -11,6 +11,7 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
         classpath "com.wynprice.cursemaven:CurseMaven:2.1.0"
+        classpath 'ch.epfl.scala:gradle-bloop_2.12:1.5.3'
     }
 }
 
@@ -18,6 +19,12 @@ apply plugin: 'scala'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: "com.matthewprenger.cursegradle"
 apply plugin: 'com.wynprice.cursemaven'
+
+// test is for compatibility with Metals import
+if (!plugins.hasPlugin("bloop")) {
+    apply plugin: "bloop"
+}
+
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 // Load properties file, easier to manage versions of required dependencies
@@ -73,6 +80,8 @@ minecraft {
 }
 
 dependencies {
+    implementation 'org.scala-lang:scala-library:2.12.17'
+
     minecraft "net.minecraftforge:forge:${config.minecraft.version}-${config.forge.version}"
     
     compileOnly fg.deobf("curse.maven:TerraFirmaCraft-${config.tfc.modid}:${config.tfc.fileid}")
