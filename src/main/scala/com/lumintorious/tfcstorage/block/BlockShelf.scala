@@ -17,14 +17,14 @@ import net.minecraft.util._
 import net.minecraft.world.{IBlockAccess, World}
 import net.minecraftforge.registries.IForgeRegistry
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.collection.mutable.HashMap
 
 object BlockShelf extends Initializable with RegistryHandler[Block] {
   val all: HashMap[Tree, BlockShelf] = new HashMap[Tree, BlockShelf]
 
   override def >>(registry: IForgeRegistry[Block]) = {
-    for (tree <- TFCRegistries.TREES.getValuesCollection) {
+    for (tree <- TFCRegistries.TREES.getValuesCollection.asScala) {
       val block = new BlockShelf(tree)
       registry.register(block)
     }

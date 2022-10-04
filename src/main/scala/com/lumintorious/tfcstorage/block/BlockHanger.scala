@@ -16,14 +16,14 @@ import net.minecraft.util.math._
 import net.minecraft.world._
 import net.minecraftforge.registries.IForgeRegistry
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.collection.mutable.HashMap
 
 object BlockHanger extends RegistryHandler[Block] {
   val all: HashMap[Tree, BlockHanger] = new HashMap[Tree, BlockHanger]
 
   override def >>(registry: IForgeRegistry[Block]) = {
-    for (tree <- TFCRegistries.TREES.getValuesCollection) {
+    for (tree <- TFCRegistries.TREES.getValuesCollection.asScala) {
       val block = new BlockHanger(tree)
       registry.register(block)
     }

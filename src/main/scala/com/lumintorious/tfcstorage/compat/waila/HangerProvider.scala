@@ -18,7 +18,7 @@ import net.minecraft.world.World
 import org.jline.utils.InfoCmp.Capability
 
 import scala.collection.mutable.MutableList
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 object HangerProvider extends IWailaBlock with Initializable {
   override def getTooltip(
@@ -33,7 +33,7 @@ object HangerProvider extends IWailaBlock with Initializable {
           list += tile.stack.getCount() + " x " + tile.stack.getDisplayName()
           Helper.computeDecayTooltip(tile.stack, list)
         }
-        list
+        list.asJava
     }
   }
 
