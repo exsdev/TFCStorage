@@ -47,6 +47,10 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
+    maven { // TOP
+        name 'tterrag maven'
+        url "https://maven.tterrag.com/"
+    }
 }
 
 minecraft {
@@ -71,9 +75,9 @@ minecraft {
 dependencies {
     minecraft "net.minecraftforge:forge:${config.minecraft.version}-${config.forge.version}"
     
-    compileOnly fg.deobf("curse.maven:TerraFirmaCraft-302973:3645502") // MC1.12.2-1.7.23.181
-    compileOnly fg.deobf("curse.maven:TheOneProbe-245211:2667280") // 1.12-1.4.28
-    compileOnly fg.deobf("curse.maven:hwyla-253449:2568751") // 1.8.26-B41_1.12.2
+    compileOnly fg.deobf("curse.maven:TerraFirmaCraft-${config.tfc.modid}:${config.tfc.fileid}")
+    compileOnly fg.deobf("curse.maven:hwyla-${config.hwyla.modid}:${config.hwyla.fileid}")
+    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${shortVersion}:${shortVersion}-${config.TOP.version}")
 }
 
 processResources {
