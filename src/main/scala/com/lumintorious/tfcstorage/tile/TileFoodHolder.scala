@@ -48,6 +48,7 @@ class TileFoodHolder extends TileEntity with ITickable{
 	
 	def handleGivenStack(stack: ItemStack): Unit = {
 		updatePreservation()
+		markForBlockUpdate()
 	}
 	
 	def giveStack(player: EntityPlayer): Boolean = giveStack(player, 64)
@@ -65,6 +66,7 @@ class TileFoodHolder extends TileEntity with ITickable{
 	
 	def handleTakenStack(stack: ItemStack): Unit = {
 		updatePreservation()
+		markForBlockUpdate()
 	}
 	
 	def takeStack(player: EntityPlayer): Boolean = takeStack(player, 64)
@@ -85,6 +87,7 @@ class TileFoodHolder extends TileEntity with ITickable{
 		if(timeLeft <= 0){
 			timeLeft = 8000
 			updatePreservation()
+			markForBlockUpdate()
 		}
 		else{
 			timeLeft += 1
@@ -94,8 +97,14 @@ class TileFoodHolder extends TileEntity with ITickable{
 	def updatePreservation() = {
 	
 	}
+
+	def markForBlockUpdate() = {
+        val state = world.getBlockState(pos);
+        world.notifyBlockUpdate(pos, state, state, 3);
+        markDirty();
+    }
 	
-	override def readFromNBT(nbt: NBTTagCompound) {
+	override def readFromNBT(nbt: NBTTagCompound) = {
 		stack = new ItemStack(nbt.getCompoundTag("stack"))
 		super.readFromNBT(nbt)
 	}
@@ -120,7 +129,7 @@ class TileFoodHolder extends TileEntity with ITickable{
 		new SPacketUpdateTileEntity(this.pos, metadata, nbt)
 	}
 	
-	override def onDataPacket(net: NetworkManager, pkt: SPacketUpdateTileEntity) {
+	override def onDataPacket(net: NetworkManager, pkt: SPacketUpdateTileEntity) = {
 		try {
 			this.readFromNBT(pkt.getNbtCompound)
 		}finally{
